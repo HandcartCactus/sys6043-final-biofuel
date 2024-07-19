@@ -1,4 +1,11 @@
 # sys6043-final-biofuel
+## Todo
+- [ ] Feedstock
+- [ ] Refinery
+- [ ] Transportation
+- [ ] Mod File
+- [ ] Tweak run file
+
 ## Edit on the web
 https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
 
