@@ -2,7 +2,7 @@
 data;
 
 # feedstock types (iter variable l)
-set L := 
+set FEEDSTOCK_TYPES := 
   corn_stover
   wheat_straw
   rice_straw
@@ -10,6 +10,3 @@ set L :=
   msw_paper
   msw_yard
   forest;
-
-# feedstock fields of feedstock type l
-...
