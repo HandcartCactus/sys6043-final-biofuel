@@ -1,1 +1,15 @@
 # Put feedstock parameters here
+data;
+
+# feedstock types (iter variable l)
+set L := 
+  corn_stover
+  wheat_straw
+  rice_straw
+  cotton_residues
+  msw_paper
+  msw_yard
+  forest;
+
+# feedstock fields of feedstock type l
+...
