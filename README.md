@@ -1,7 +1,12 @@
 # sys6043-final-biofuel
+## Edit on the web
 https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
 
-## Get recent changes
+## Edit locally: Clone Repo
+```
+git clone https://github.com/HandcartCactus/sys6043-final-biofuel.git .
+```
+## Edit locally: Get recent changes
 See what's changed on the server
 ```bash
 git fetch
@@ -11,7 +16,7 @@ Pull changes from server
 git pull
 ```
 
-## Save and share your work
+## Edit locally: Save and share your work
 See what's up
 ```bash
 git status
