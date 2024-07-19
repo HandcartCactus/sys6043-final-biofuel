@@ -1,0 +1,14 @@
+reset;
+option solver cplex;
+
+model biofuel.mod;
+
+data biofuel_transport.dat;
+data biofuel_refinery.dat;
+data biofuel_feedstock.dat;
+
+solve;
+
+# display variables
+
+# expand constraints
