@@ -23,7 +23,10 @@ param ethanol_shortage_cost >= 0;# \alpha The penalty cost of ethanol demand sho
 
 ## Transport
 param average_travel_speed > 0; # v Truck average travel speed (mile/h)
-param distance{i in POTENTIAL_REFINERY_LOCATION union DEMAND_CITIES, j in POTENTIAL_REFINERY_LOCATION union DEMAND_CITIES} >= 0; # d_{ij} Distance between node i and j in miles
+param distance{
+  i in POTENTIAL_REFINERY_LOCATION union DEMAND_CITIES union FEEDSTOCK_FIELDS, 
+  j in POTENTIAL_REFINERY_LOCATION union DEMAND_CITIES union FEEDSTOCK_FIELDS
+} >= 0; # d_{ij} Distance between node i and j in miles
 
 param cost_mile_solids >= 0; # t_b^d Distance-dependent transportation cost ($/mile/truckload) of bulk solids, i.e., the cost of traveling one mile per truckload, including expenses of truck fuel, insurance, maintenance, and permittings
 param cost_hour_solids >= 0; # t_b^t Travel time dependent transportation cost ($/h/truckload) of bulk solids, i.e., the cost of traveling 1 h per truckload, including labor and capital costs
