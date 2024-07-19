@@ -6,6 +6,14 @@
 - [ ] Mod File
 - [ ] Tweak run file
 
+## Adding a parameter
+1. New Branch
+2. Add parameter declarations to `biofuel.mod`.
+3. Commit
+4. Add parameter values to `biofuel_file.dat`
+5. Commit
+6. Pull request
+
 ## Edit on the web
 https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
 
