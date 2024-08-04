@@ -215,4 +215,5 @@ param unit_cost :=
     RIV     950 
     LB      990;
 
+# https://www.fsa.usda.gov/Internet/FSA_File/ethanol_fromsugar_july06.pdf
 param ethanol_production_cost := 4.00;
