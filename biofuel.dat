@@ -97,3 +97,16 @@ param ethanol_per_dry_ton :=
     msw_paper 86,
     msw_yard 70,
     forest 90.2;
+
+# 50 M gallons
+param max_refinery_capacity :=
+    SAC     50000000 
+    FRESNO  50000000     
+    BAKO    50000000 
+    MOD     50000000 
+    STOCK   50000000 
+    REDD    50000000 
+    SLO     50000000 
+    SM      50000000 
+    RIV     50000000 
+    LB      50000000; 

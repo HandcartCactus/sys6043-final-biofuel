@@ -39,7 +39,7 @@ param truck_solids_capacity >= 0; # cap_b Truck bulk solids capacity (dry ton)
 param truck_liquids_capacity >= 0; # cap_{lq} Truck liquids capacity (gallon)
 
 # Variables
-var open_refinery{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} binary; # z_j^t; =1 if refinery j is opened at time phase t; =0 otherwise
+var refinery_open{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} binary; # z_j^t; =1 if refinery j is opened at time phase t; =0 otherwise
 var feedstock_acquired{FEEDSTOCK_FIELDS, TIME_STAGES} >= 0;#Y_{I_l}^t The amount (dry ton) of feedstock of type l procured at field I_l at time phase t
 var feedstock_transported{FEEDSTOCK_FIELDS, POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0;#x_{I_l, j}^t The amount (dry ton) of feedstock of type l transported from field il to refinery j at time t
 var ethanol_transported{POTENTIAL_REFINERY_LOCATION, DEMAND_CITIES, TIME_STAGES} >= 0; #y_{j,m}^t The amount (gallon) of ethanol transported from refinery j to city m at time t
@@ -51,6 +51,7 @@ var ethanol_production{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0; # pr_j^t 
 
 
 # Constraints
+# 2
 subject to EthanolProductionIsFeedstockTimesConversionRate {t in TIME_STAGES, refinery in POTENTIAL_REFINERY_LOCATION}:
     sum {
       feedstock_type in FEEDSTOCK_TYPES, 
@@ -60,10 +61,25 @@ subject to EthanolProductionIsFeedstockTimesConversionRate {t in TIME_STAGES, re
       feedstock_transported[feedstock_field, refinery, t] * ethanol_per_dry_ton[feedstock_type] = 
       ethanol_production[refinery, t];
 
+# 3
 subject to MustProduceWhatGetsSentToCity {
   t in TIME_STAGES,
   refinery in POTENTIAL_REFINERY_LOCATION
 }:
-  sum {
-    city in DEMAND_CITIES
-  } ethanol_transported[refinery, city, t] = ethanol_production[refinery, t];
+  sum {city in DEMAND_CITIES} ethanol_transported[refinery, city, t] = ethanol_production[refinery, t];
+
+# 4
+subject to RefineryCapacityMaximums{
+  t in TIME_STAGES,
+  refinery in POTENTIAL_REFINERY_LOCATION
+}:
+  designed_refinery_capacity[refinery, t] <= max_refinery_capacity[refinery] * refinery_open[refinery, t];
+
+#
+subject to CannotCloseRefinery{
+  t1 in TIME_STAGES,
+  t2 in TIME_STAGES,
+  refinery in POTENTIAL_REFINERY_LOCATION:
+  t1 < t2
+}:
+  refinery_open[refinery, t1] <= refinery_open[refinery, t2];

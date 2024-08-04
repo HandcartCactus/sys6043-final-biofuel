@@ -12,7 +12,7 @@ data biofuel.dat;
 solve;
 
 # display variables
-display open_refinery;
+display refinery_open;
 display feedstock_acquired;
 display feedstock_transported;
 display ethanol_transported;
