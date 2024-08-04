@@ -188,4 +188,30 @@ param demand :=
     OAK    3    90
     BAKO   3    90
     ANHM   3    90;
-         
+
+param setup_cost :=
+    SAC     20000 
+    FRESNO  30000 
+    BAKO    40000 
+    MOD     50000 
+    STOCK   60000 
+    REDD    70000 
+    SLO     80000 
+    SM      90000 
+    RIV     95000 
+    LB      99000;
+
+param ethanol_shortage_cost := 9999;
+
+param unit_cost :=
+    SAC     990
+    FRESNO  950 
+    BAKO    900 
+    MOD     800 
+    STOCK   900 
+    REDD    800 
+    SLO     800 
+    SM      900 
+    RIV     950 
+    LB      990;
+

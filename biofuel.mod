@@ -49,7 +49,32 @@ var shortage_ethanol{DEMAND_CITIES, TIME_STAGES} >= 0;# q_m^t The shortage of et
 var ethanol_production{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0; # pr_j^t Ethanol production (gallon) at refinery j at time t
 
 # Objective Function
-
+minimize TotalCost:
+  sum{t in TIME_STAGES} (
+    (
+      # operating costs
+      sum{refinery in POTENTIAL_REFINERY_LOCATION} 
+        setup_cost[refinery] * refinery_open[refinery, t]
+      + 
+      sum{refinery in POTENTIAL_REFINERY_LOCATION} 
+        unit_cost[refinery] * designed_refinery_capacity[refinery, t]
+    )
+    +
+    (
+      # feedstock procurement costs
+      sum {
+        feedstock_type in FEEDSTOCK_TYPES, 
+        feedstock_field in FEEDSTOCK_FIELDS: 
+          feedstock_field_types[feedstock_type, feedstock_field]=1
+      }
+      procurement_cost[feedstock_type] * feedstock_acquired[feedstock_field, t]
+    )
+    +
+    (
+      # cost of external ethanol supply
+      sum {city in DEMAND_CITIES} ethanol_shortage_cost * shortage_ethanol[city, t]
+    )
+  );
 
 # Constraints
 # 2
