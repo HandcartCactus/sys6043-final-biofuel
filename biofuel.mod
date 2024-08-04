@@ -117,3 +117,13 @@ subject to AcquiredFeedstockUnderFieldCapacity {
     feedstock_field_types[feedstock_type, feedstock_field]=1
 }:
   feedstock_acquired[feedstock_field, t] <= max_feedstock[feedstock_field, t];
+
+#10 requires that the demand at each city is supplied by production from 
+# refineries and/or outsourced fuel supply presented by the shortage term ðqt mÞ in the equation.
+subject to MustMeetCityDemand {
+  t in TIME_STAGES,
+  city in DEMAND_CITIES
+}:
+  (sum {refinery in POTENTIAL_REFINERY_LOCATION} ethanol_transported[refinery, city, t])
+  + shortage_ethanol[city, t]
+  = demand[city, t];

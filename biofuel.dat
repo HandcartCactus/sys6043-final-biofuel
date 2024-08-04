@@ -127,7 +127,7 @@ param max_feedstock :=
     msw_yard_fld2          1    726630.100
     forest_fld1            1    1466613.60
     forest_fld2            1    2801624.30
-    
+
     corn_stover_fld1       2    457588.100
     corn_stover_fld2       2    105078.800
     wheat_straw_fld1       2    244500.300
@@ -142,7 +142,7 @@ param max_feedstock :=
     msw_yard_fld2          2    726630.100
     forest_fld1            2    1466613.60
     forest_fld2            2    2801624.30
-    
+
     corn_stover_fld1       3    457588.100
     corn_stover_fld2       3    105078.800
     wheat_straw_fld1       3    244500.300
@@ -157,3 +157,35 @@ param max_feedstock :=
     msw_yard_fld2          3    726630.100
     forest_fld1            3    1466613.60
     forest_fld2            3    2801624.30;
+
+param demand :=
+    LA     1    50 
+    SD     1    50 
+    SF     1    50 
+    SJ     1    50 
+    SAC    1    50 
+    LB     1    50 
+    OAK    1    50 
+    BAKO   1    50     
+    ANHM   1    50
+
+    LA     2    70
+    SD     2    70
+    SF     2    70
+    SJ     2    70
+    SAC    2    70
+    LB     2    70
+    OAK    2    70
+    BAKO   2    70
+    ANHM   2    70
+
+    LA     3    90
+    SD     3    90
+    SF     3    90
+    SJ     3    90
+    SAC    3    90
+    LB     3    90
+    OAK    3    90
+    BAKO   3    90
+    ANHM   3    90;
+         
