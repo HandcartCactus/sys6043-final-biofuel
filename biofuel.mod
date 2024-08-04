@@ -99,3 +99,12 @@ subject to CannotScaleBackRefinery{
   t1 < t2
 }:
   designed_refinery_capacity[refinery, t1] <= designed_refinery_capacity[refinery, t2];
+
+# 8
+subject to AcquiredFeedstockMustBeDeliveredToRefinery {
+  t in TIME_STAGES,
+  feedstock_type in FEEDSTOCK_TYPES, 
+  feedstock_field in FEEDSTOCK_FIELDS: 
+    feedstock_field_types[feedstock_type, feedstock_field]=1
+}:
+  sum {refinery in POTENTIAL_REFINERY_LOCATION} feedstock_transported[feedstock_field, refinery, t] = feedstock_acquired[feedstock_field, t];
