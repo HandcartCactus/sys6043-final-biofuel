@@ -1,0 +1,99 @@
+data;
+
+set TIME_STAGES:= 1 2 3; # T
+
+# feedstock types (iter variable l)
+set FEEDSTOCK_TYPES := 
+  corn_stover
+  wheat_straw
+  rice_straw
+  cotton_residues
+  msw_paper
+  msw_yard
+  forest;
+
+set FEEDSTOCK_FIELDS := 
+    corn_stover_fld1
+    corn_stover_fld2
+    wheat_straw_fld1
+    wheat_straw_fld2
+    rice_straw_fld1
+    rice_straw_fld2
+    cotton_residues_fld1
+    cotton_residues_fld2
+    msw_paper_fld1
+    msw_paper_fld2
+    msw_yard_fld1
+    msw_yard_fld2
+    forest_fld1
+    forest_fld2;
+
+# LOS ANGELES
+# SAN DIEGO
+# SAN FRANCISCO
+# SAN JOSE
+# SACRAMENTO
+# LONG BEACH
+# OAKLAND
+# BAKERSFIELD
+# ANAHEIM
+set DEMAND_CITIES := 
+    LA
+    SD
+    SF
+    SJ
+    SAC
+    LB
+    OAK
+    BAKO
+    ANHM;
+
+# california seems like a bad place to put a refinery in terms of crop residue availability
+# https://www1.eere.energy.gov/bioenergy/pdfs/btu_crop_residues.pdf
+set POTENTIAL_REFINERY_LOCATION := 
+    SAC     # SACRAMENTO
+    FRESNO
+    BAKO    # BAKERSFIELD
+    MOD     # MODESTO
+    STOCK   # STOCKTON
+    REDD    # REDDING
+    SLO     # SAN LUIS OBISPO
+    SM      # SANTA MARIA
+    RIV     # RIVERSIDE
+    LB;     # LONG BEACH
+
+param feedstock_field_types default 0 :=
+corn_stover       corn_stover_fld1       1
+corn_stover       corn_stover_fld2       1
+wheat_straw       wheat_straw_fld1       1
+wheat_straw       wheat_straw_fld2       1
+rice_straw        rice_straw_fld1        1
+rice_straw        rice_straw_fld2        1
+cotton_residues   cotton_residues_fld1   1
+cotton_residues   cotton_residues_fld2   1
+msw_paper         msw_paper_fld1         1
+msw_paper         msw_paper_fld2         1
+msw_yard          msw_yard_fld1          1
+msw_yard          msw_yard_fld2          1
+forest            forest_fld1            1
+forest            forest_fld2            1;
+
+# procurement costs arent fixed, most reports usually have tables of "amount available at $X cost per bushel/dry ton"
+param procurement_cost :=
+  corn_stover       35,     #30,  # $/dry ton # https://www.agmrc.org/commodities-products/biomass/corn-stover
+  wheat_straw       35,     #200, # $/dry ton # https://ipcm.wisc.edu/blog/2022/07/is-harvesting-wheat-straw-profitable-in-2022/
+  rice_straw        30,     #110, # $/dry ton # https://www.alibaba.com/product-detail/Forage-for-Animal-Feed-Rice-Plant_10000012697559.html?spm=a2700.7724857.0.0.29382c50CrT1U9 lol
+  cotton_residues   30,     #10,  # $/dry ton # dont know about this
+  msw_paper         27.5,   #55,  # $/dry ton # https://www.energy.gov/sites/prod/files/2016/07/f33/municipal_solid_waste_factsheet_bt16.pdf
+  msw_yard          27.5,   #60,  # $/dry ton # https://www.energy.gov/sites/prod/files/2016/07/f33/municipal_solid_waste_factsheet_bt16.pdf
+  forest            30;     #60;  # $/dry ton
+
+# https://www.fsa.usda.gov/Internet/FSA_File/ethanol_fromsugar_july06.pdf
+param ethanol_per_dry_ton := 
+    corn_stover 80.6,
+    wheat_straw 76.8,
+    rice_straw 76.9,
+    cotton_residues 78.05,
+    msw_paper 86,
+    msw_yard 70,
+    forest 90.2;

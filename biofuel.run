@@ -3,12 +3,22 @@ option solver cplex;
 
 model biofuel.mod;
 
-data biofuel_transport.dat;
-data biofuel_refinery.dat;
-data biofuel_feedstock.dat;
+# data biofuel_transport.dat;
+# data biofuel_refinery.dat;
+# data biofuel_feedstock.dat;
+
+data biofuel.dat;
 
 solve;
 
 # display variables
+display open_refinery;
+display feedstock_acquired;
+display feedstock_transported;
+display ethanol_transported;
+display designed_refinery_capacity;
+display shortage_ethanol;
+display ethanol_production;
+
 
 # expand constraints

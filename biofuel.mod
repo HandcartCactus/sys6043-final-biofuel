@@ -1,6 +1,6 @@
 # Declare Parameters
 ## general
-set TIME_STAGES:= 1..3; # T
+set TIME_STAGES; # T
 set DEMAND_CITIES; # M
 param demand{DEMAND_CITIES, TIME_STAGES} >= 0; # D_m^t Demand at city m at time phase t
 
@@ -57,4 +57,13 @@ subject to EthanolProductionIsFeedstockTimesConversionRate {t in TIME_STAGES, re
       feedstock_field in FEEDSTOCK_FIELDS: 
         feedstock_field_types[feedstock_type, feedstock_field]=1
       }
-      feedstock_transported[feedstock_field, refinery, t] * ethanol_per_dry_ton[feedstock_type] = ethanol_production[refinery, t];
+      feedstock_transported[feedstock_field, refinery, t] * ethanol_per_dry_ton[feedstock_type] = 
+      ethanol_production[refinery, t];
+
+subject to MustProduceWhatGetsSentToCity {
+  t in TIME_STAGES,
+  refinery in POTENTIAL_REFINERY_LOCATION
+}:
+  sum {
+    city in DEMAND_CITIES
+  } ethanol_transported[refinery, city, t] = ethanol_production[refinery, t];
