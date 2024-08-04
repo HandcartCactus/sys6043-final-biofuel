@@ -75,7 +75,7 @@ subject to RefineryCapacityMaximums{
 }:
   designed_refinery_capacity[refinery, t] <= max_refinery_capacity[refinery] * refinery_open[refinery, t];
 
-#
+# 5
 subject to CannotCloseRefinery{
   t1 in TIME_STAGES,
   t2 in TIME_STAGES,
