@@ -39,11 +39,12 @@ param truck_solids_capacity >= 0; # cap_b Truck bulk solids capacity (dry ton)
 param truck_liquids_capacity >= 0; # cap_{lq} Truck liquids capacity (gallon)
 
 # Variables
+# covers variable restriction constraints 11-16
 var refinery_open{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} binary; # z_j^t; =1 if refinery j is opened at time phase t; =0 otherwise
 var feedstock_acquired{FEEDSTOCK_FIELDS, TIME_STAGES} >= 0;#Y_{I_l}^t The amount (dry ton) of feedstock of type l procured at field I_l at time phase t
 var feedstock_transported{FEEDSTOCK_FIELDS, POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0;#x_{I_l, j}^t The amount (dry ton) of feedstock of type l transported from field il to refinery j at time t
 var ethanol_transported{POTENTIAL_REFINERY_LOCATION, DEMAND_CITIES, TIME_STAGES} >= 0; #y_{j,m}^t The amount (gallon) of ethanol transported from refinery j to city m at time t
-var designed_refinery_capacity{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} integer >= 0;# cap_j^t The designed refinery capacity (gallon) of refinery j at time t
+var designed_refinery_capacity{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0;# cap_j^t The designed refinery capacity (gallon) of refinery j at time t
 var shortage_ethanol{DEMAND_CITIES, TIME_STAGES} >= 0;# q_m^t The shortage of ethanol demand (gallon) from city m
 var ethanol_production{POTENTIAL_REFINERY_LOCATION, TIME_STAGES} >= 0; # pr_j^t Ethanol production (gallon) at refinery j at time t
 
@@ -118,8 +119,7 @@ subject to AcquiredFeedstockUnderFieldCapacity {
 }:
   feedstock_acquired[feedstock_field, t] <= max_feedstock[feedstock_field, t];
 
-#10 requires that the demand at each city is supplied by production from 
-# refineries and/or outsourced fuel supply presented by the shortage term ðqt mÞ in the equation.
+#10 
 subject to MustMeetCityDemand {
   t in TIME_STAGES,
   city in DEMAND_CITIES
@@ -127,3 +127,6 @@ subject to MustMeetCityDemand {
   (sum {refinery in POTENTIAL_REFINERY_LOCATION} ethanol_transported[refinery, city, t])
   + shortage_ethanol[city, t]
   = demand[city, t];
+
+# 11 - 16
+# variable restrictions set above
