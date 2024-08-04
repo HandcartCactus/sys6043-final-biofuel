@@ -74,7 +74,44 @@ minimize TotalCost:
       # ethanol production costs
       sum {refinery in POTENTIAL_REFINERY_LOCATION} 
         ethanol_production_cost * ethanol_production[refinery, t]
-
+    )
+    +
+    (
+      # TC1 feedstock delivery cost from biomass fields to refineries
+      sum {
+        refinery in POTENTIAL_REFINERY_LOCATION,
+        feedstock_type in FEEDSTOCK_TYPES, 
+        feedstock_field in FEEDSTOCK_FIELDS: 
+          feedstock_field_types[feedstock_type, feedstock_field]=1
+      }(
+        (
+          (
+            (cost_mile_solids + (cost_hour_solids / average_travel_speed))
+            *
+            distance[feedstock_field, refinery]/truck_solids_capacity
+          ) 
+          + cost_load_unload_solids
+        )
+        *
+        (
+          feedstock_transported[feedstock_field, refinery, t] / (1 - moisture_content[feedstock_type])
+        )
+      )
+    )
+    +
+    (
+      # TC2 fuel distribution cost from refineries to cities
+      sum{refinery in POTENTIAL_REFINERY_LOCATION, city in DEMAND_CITIES}((
+          (
+            (cost_mile_liquids + (cost_hour_liquids / average_travel_speed))
+            *
+            distance[refinery, city]/truck_liquids_capacity
+          ) 
+          + cost_load_unload_liquids
+        )
+        *
+        ethanol_transported[refinery, city, t]
+      )
     )
     +
     (

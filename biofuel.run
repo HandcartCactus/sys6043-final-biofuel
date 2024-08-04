@@ -22,3 +22,6 @@ display ethanol_production;
 
 
 # expand constraints
+display sum {city in DEMAND_CITIES} demand[city,1];
+display sum {city in DEMAND_CITIES} demand[city,2];
+display sum {city in DEMAND_CITIES} demand[city,3];
