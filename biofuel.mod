@@ -90,3 +90,12 @@ subject to ProductionLimitedToRefineryCapacity{
   refinery in POTENTIAL_REFINERY_LOCATION
 }:
   ethanol_production[refinery, t] <= designed_refinery_capacity[refinery, t];
+
+# 7
+subject to CannotScaleBackRefinery{
+  t1 in TIME_STAGES,
+  t2 in TIME_STAGES,
+  refinery in POTENTIAL_REFINERY_LOCATION:
+  t1 < t2
+}:
+  designed_refinery_capacity[refinery, t1] <= designed_refinery_capacity[refinery, t2];
