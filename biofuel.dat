@@ -215,3 +215,4 @@ param unit_cost :=
     RIV     950 
     LB      990;
 
+param ethanol_production_cost := 4.00;

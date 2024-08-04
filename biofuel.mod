@@ -71,6 +71,13 @@ minimize TotalCost:
     )
     +
     (
+      # ethanol production costs
+      sum {refinery in POTENTIAL_REFINERY_LOCATION} 
+        ethanol_production_cost * ethanol_production[refinery, t]
+
+    )
+    +
+    (
       # cost of external ethanol supply
       sum {city in DEMAND_CITIES} ethanol_shortage_cost * shortage_ethanol[city, t]
     )
