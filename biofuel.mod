@@ -108,3 +108,12 @@ subject to AcquiredFeedstockMustBeDeliveredToRefinery {
     feedstock_field_types[feedstock_type, feedstock_field]=1
 }:
   sum {refinery in POTENTIAL_REFINERY_LOCATION} feedstock_transported[feedstock_field, refinery, t] = feedstock_acquired[feedstock_field, t];
+
+# 9
+subject to AcquiredFeedstockUnderFieldCapacity {
+  t in TIME_STAGES,
+  feedstock_type in FEEDSTOCK_TYPES, 
+  feedstock_field in FEEDSTOCK_FIELDS: 
+    feedstock_field_types[feedstock_type, feedstock_field]=1
+}:
+  feedstock_acquired[feedstock_field, t] <= max_feedstock[feedstock_field, t];
