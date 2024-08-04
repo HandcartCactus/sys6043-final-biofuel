@@ -109,4 +109,51 @@ param max_refinery_capacity :=
     SLO     50000000 
     SM      50000000 
     RIV     50000000 
-    LB      50000000; 
+    LB      50000000;
+
+
+param max_feedstock :=
+    corn_stover_fld1       1    457588.100
+    corn_stover_fld2       1    105078.800
+    wheat_straw_fld1       1    244500.300
+    wheat_straw_fld2       1    123558.600
+    rice_straw_fld1        1    6619.30000
+    rice_straw_fld2        1    859985.600
+    cotton_residues_fld1   1    76999.2000
+    cotton_residues_fld2   1    362088.700
+    msw_paper_fld1         1    1678960.30
+    msw_paper_fld2         1    64121.6000
+    msw_yard_fld1          1    172145.800
+    msw_yard_fld2          1    726630.100
+    forest_fld1            1    1466613.60
+    forest_fld2            1    2801624.30
+    
+    corn_stover_fld1       2    457588.100
+    corn_stover_fld2       2    105078.800
+    wheat_straw_fld1       2    244500.300
+    wheat_straw_fld2       2    123558.600
+    rice_straw_fld1        2    6619.30000
+    rice_straw_fld2        2    859985.600
+    cotton_residues_fld1   2    76999.2000
+    cotton_residues_fld2   2    362088.700
+    msw_paper_fld1         2    1678960.30
+    msw_paper_fld2         2    64121.6000
+    msw_yard_fld1          2    172145.800
+    msw_yard_fld2          2    726630.100
+    forest_fld1            2    1466613.60
+    forest_fld2            2    2801624.30
+    
+    corn_stover_fld1       3    457588.100
+    corn_stover_fld2       3    105078.800
+    wheat_straw_fld1       3    244500.300
+    wheat_straw_fld2       3    123558.600
+    rice_straw_fld1        3    6619.30000
+    rice_straw_fld2        3    859985.600
+    cotton_residues_fld1   3    76999.2000
+    cotton_residues_fld2   3    362088.700
+    msw_paper_fld1         3    1678960.30
+    msw_paper_fld2         3    64121.6000
+    msw_yard_fld1          3    172145.800
+    msw_yard_fld2          3    726630.100
+    forest_fld1            3    1466613.60
+    forest_fld2            3    2801624.30;
